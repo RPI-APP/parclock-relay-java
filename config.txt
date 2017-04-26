@@ -1,0 +1,20 @@
+# Server IP or Hostname
+#server: abraxas.phys.rpi.edu
+server: 127.0.0.1
+#server: 10.0.0.211
+
+# The port for the NTP server running on the server
+# Default: 63786
+ntpPortServer: 63786
+
+# The port for the NTP server running on the client
+# Default: 63787
+ntpPortClient: 63787
+
+# Relay-Server connection settings
+# Default: 58400
+relayPort: 58400
+
+# Relay-LabVIEW connection settings
+# Default: 64501 
+labviewPort: 64501
