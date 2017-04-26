@@ -1,4 +1,4 @@
-package com.centekeng.software.xenon.relay.comms;
+package com.centeksoftware.parclock.javarelay.comms;
 
 import java.awt.Color;
 import java.net.ServerSocket;
@@ -6,10 +6,10 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import com.centekeng.software.xenon.relay.MainFrame;
-import com.centekeng.software.xenon.relay.storage.DataBuffer;
-import com.centekeng.software.xenon.relay.storage.DataChunk;
-import com.centekeng.software.xenon.relay.time.TimeHandler;
+import com.centeksoftware.parclock.javarelay.MainFrame;
+import com.centeksoftware.parclock.javarelay.storage.DataBuffer;
+import com.centeksoftware.parclock.javarelay.storage.DataChunk;
+import com.centeksoftware.parclock.javarelay.time.TimeHandler;
 
 /**
  * The main server for communicating with LabView

@@ -1,4 +1,4 @@
-package com.centekeng.software.xenon.relay.storage;
+package com.centeksoftware.parclock.javarelay.storage;
 
 /**
  * Represents a single measurement

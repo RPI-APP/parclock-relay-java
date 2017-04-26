@@ -1,4 +1,4 @@
-package com.centekeng.software.xenon.relay.time;
+package com.centeksoftware.parclock.javarelay.time;
 
 import org.apache.commons.net.ntp.ClientTimeSource;
 import org.apache.directory.server.ntp.time.ServerTimeSource;

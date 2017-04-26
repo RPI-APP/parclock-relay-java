@@ -1,4 +1,4 @@
-package com.centekeng.software.xenon.relay.comms;
+package com.centeksoftware.parclock.javarelay.comms;
 
 import java.awt.Color;
 import java.io.DataOutputStream;
@@ -6,13 +6,13 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 
-import com.centekeng.software.xenon.relay.Main;
-import com.centekeng.software.xenon.relay.MainFrame;
-import com.centekeng.software.xenon.relay.storage.DataBuffer;
-import com.centekeng.software.xenon.relay.storage.DataChunk;
-import com.centekeng.software.xenon.relay.storage.TrackSelector;
-import com.centekeng.software.xenon.relay.time.TimeHandler;
-import com.centekeng.software.xenon.relay.time.TimeServer;
+import com.centeksoftware.parclock.javarelay.Main;
+import com.centeksoftware.parclock.javarelay.MainFrame;
+import com.centeksoftware.parclock.javarelay.storage.DataBuffer;
+import com.centeksoftware.parclock.javarelay.storage.DataChunk;
+import com.centeksoftware.parclock.javarelay.storage.TrackSelector;
+import com.centeksoftware.parclock.javarelay.time.TimeHandler;
+import com.centeksoftware.parclock.javarelay.time.TimeServer;
 
 /**
  * Handles big picture communications including handshaking, organizing time syncs, and starting

@@ -1,4 +1,4 @@
-package com.centekeng.software.xenon.relay.time;
+package com.centeksoftware.parclock.javarelay.time;
 
 import java.io.IOException;
 

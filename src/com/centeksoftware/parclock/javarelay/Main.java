@@ -1,12 +1,12 @@
-package com.centekeng.software.xenon.relay;
+package com.centeksoftware.parclock.javarelay;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import com.centekeng.software.xenon.relay.comms.CommunicationHandler;
-import com.centekeng.software.xenon.relay.storage.DataBuffer;
-import com.centekeng.software.xenon.relay.storage.TrackSelector;
+import com.centeksoftware.parclock.javarelay.comms.CommunicationHandler;
+import com.centeksoftware.parclock.javarelay.storage.DataBuffer;
+import com.centeksoftware.parclock.javarelay.storage.TrackSelector;
 
 /**
  * 

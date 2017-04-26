@@ -1,4 +1,4 @@
-package com.centekeng.software.xenon.relay.tools;
+package com.centeksoftware.parclock.javarelay.tools;
 import java.util.Arrays;
 
 /**

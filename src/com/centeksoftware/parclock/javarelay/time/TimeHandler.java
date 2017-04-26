@@ -1,4 +1,4 @@
-package com.centekeng.software.xenon.relay.time;
+package com.centeksoftware.parclock.javarelay.time;
 
 import java.awt.Color;
 import java.net.InetAddress;
@@ -9,10 +9,10 @@ import org.apache.commons.net.ntp.TimeInfo;
 import org.apache.directory.server.ntp.time.ServerTimeSource;
 import org.terracotta.statistics.Time.TimeSource;
 
-import com.centekeng.software.xenon.relay.Main;
-import com.centekeng.software.xenon.relay.MainFrame;
-import com.centekeng.software.xenon.relay.comms.CommunicationHandler;
-import com.centekeng.software.xenon.relay.tools.ArrayTools;
+import com.centeksoftware.parclock.javarelay.Main;
+import com.centeksoftware.parclock.javarelay.MainFrame;
+import com.centeksoftware.parclock.javarelay.comms.CommunicationHandler;
+import com.centeksoftware.parclock.javarelay.tools.ArrayTools;
 
 /**
  * Handles communicating with the time server

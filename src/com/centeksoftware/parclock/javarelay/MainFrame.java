@@ -1,4 +1,4 @@
-package com.centekeng.software.xenon.relay;
+package com.centeksoftware.parclock.javarelay;
 
 import java.awt.Color;
 
