@@ -295,10 +295,12 @@ public class CommunicationHandler
 		// Begin communication with the LabView instance
 		if (labView == null)
 		{
+		
 			mf.println("CH", "Establishing LabVIEW communications");
 			
 			labView = new LabviewServer(labviewPort, dataBuffer, timeHandler, mf);
 			labView.start();
+			
 		}
 		else
 			mf.println("CH", "Reusing existing LabVIEW comms");

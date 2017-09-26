@@ -1,6 +1,7 @@
 package com.centeksoftware.parclock.javarelay.comms;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
@@ -64,33 +65,23 @@ public class LabviewServer
 	 */
 	public void start()
 	{
-		new Thread()
-		{
-			public void run()
-			{
-				LabviewServer.this.server();
-			}
-		}.start();
+		LabviewServer.this.server();
 	}
 	
 	private void server()
 	{
-		while (true)
-		{
-			setConnected(false);
-			mf.println("LV", "Trying to connect to LabView...");
-			
-			ServerSocket serverSocket;
-			Socket sock;
+		final ServerSocket serverSocket;
+		ServerSocket temp;
+		while(true) {
 			try
 			{
-				serverSocket = new ServerSocket(labviewPort);
-				sock = serverSocket.accept();
+				 temp = new ServerSocket(labviewPort);
+				 
 			} catch (Exception e)
 			{
 				e.printStackTrace();
 				
-				mf.println("LV", "Failed to connect. Trying again...");
+				mf.println("LV", "Failed to open port. Trying again...");
 				
 				try
 				{
@@ -102,8 +93,39 @@ public class LabviewServer
 				
 				continue;
 			}
-			
-			setConnected(true);
+			break;
+		}
+		
+		serverSocket = temp;
+		try {
+			while (true) {
+                try {
+					new Handler(serverSocket.accept()).start();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+            }
+			}
+		finally {
+			try {
+				serverSocket.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private class Handler extends Thread {
+		
+        private Socket sock;
+
+        public Handler(Socket sock) {
+            this.sock = sock;
+        }
+		
+        public void run() {
+        	
+        	setConnected(true);
 			mf.println("LV", "Successfully connected to LabView.");
 			
 			try
@@ -141,15 +163,31 @@ public class LabviewServer
 					
 				}
 				scan.close();
-				
 				sock.close();
-				serverSocket.close();
+				setConnected(false);
 			} catch (Exception e)
 			{
 				e.printStackTrace();
 				mf.println("LV", "Lost connection to LabView.");
+				
 			}
-		}
+        	
+        	
+        }
+		
 	}
 	
-}
+	
+	
+	
+	
+	
+	}
+
+
+
+
+
+
+
+	
