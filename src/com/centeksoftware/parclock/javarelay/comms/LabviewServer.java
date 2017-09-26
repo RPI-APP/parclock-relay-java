@@ -65,7 +65,13 @@ public class LabviewServer
 	 */
 	public void start()
 	{
+		new Thread()
+		{
+			public void run()
+			{
 		LabviewServer.this.server();
+			}
+		}.start();
 	}
 	
 	private void server()
