@@ -15,7 +15,8 @@ import com.centeksoftware.parclock.javarelay.storage.TrackSelector;
  */
 public class Main
 {
-	// Only change this if the protocol changes. It makes it so other versions can't connect to it.
+	// Only change this if the protocol changes. It makes it so other versions can't
+	// connect to it.
 	public static final int PROTOCOL_VERSION = 12;
 	
 	public static void main(String args[]) throws FileNotFoundException
@@ -69,8 +70,7 @@ public class Main
 		DataBuffer dataBuffer = new DataBuffer();
 		
 		// Create communications object
-		CommunicationHandler ch = new CommunicationHandler(mf, server, relayPort, ntpPortClient,
-				ntpPortServer, labviewPort, dataBuffer);
+		CommunicationHandler ch = new CommunicationHandler(mf, server, relayPort, ntpPortClient, ntpPortServer, labviewPort, dataBuffer);
 		
 		// Begin choosing where data goes
 		TrackSelector trackSelector = new TrackSelector(dataBuffer, mf, ch);
