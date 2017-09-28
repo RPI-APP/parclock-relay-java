@@ -56,13 +56,11 @@ public class RecoveryFile
 	 */
 	private volatile boolean isEmpty = false;
 	/**
-	 * This is populated by the peek function, and remains the "next" {@link DataChunk} until it is
-	 * explicitly cleared using markPreviousChunkSent()
+	 * This is populated by the peek function, and remains the "next" {@link DataChunk} until it is explicitly cleared using markPreviousChunkSent()
 	 */
 	private volatile DataChunk peekNext = null;
 	/**
-	 * The number of elements added to the file in this session. The actual number might be higher
-	 * (but never lower)
+	 * The number of elements added to the file in this session. The actual number might be higher (but never lower)
 	 */
 	private volatile int count = 0;
 	
@@ -198,8 +196,7 @@ public class RecoveryFile
 	}
 	
 	/**
-	 * Returns the number of elements added to the file in this session. The actual total number
-	 * might be higher (but never lower)
+	 * Returns the number of elements added to the file in this session. The actual total number might be higher (but never lower)
 	 * 
 	 * @return The number of elements added to the file in this session
 	 */
@@ -209,8 +206,7 @@ public class RecoveryFile
 	}
 	
 	/**
-	 * Takes a look at the next {@link DataChunk} in the recovery file, without actually altering
-	 * our current position in the file
+	 * Takes a look at the next {@link DataChunk} in the recovery file, without actually altering our current position in the file
 	 * 
 	 * @return The next {@link DataChunk} in the recovery file
 	 */
@@ -272,8 +268,7 @@ public class RecoveryFile
 					// Something was wrong with the recovery data
 					// This is expected if a line became corrupted.
 					
-					mf.println("RF",
-							"A line in the recovery file was corrupted and is being ignored.");
+					mf.println("RF", "A line in the recovery file was corrupted and is being ignored.");
 					
 					continue;
 				}

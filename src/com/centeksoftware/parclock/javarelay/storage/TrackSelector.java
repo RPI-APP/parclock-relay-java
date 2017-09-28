@@ -93,8 +93,7 @@ public class TrackSelector
 					popFlatToMs = true;
 					dumpBuffToFF = true;
 				}
-			}
-			else
+			} else
 				dumpBuffToFF = true;
 			
 			mf.setActions(popBuffToMs, popFlatToMs, dumpBuffToFF);

@@ -1,6 +1,6 @@
 # Server IP or Hostname
-#server: abraxas.phys.rpi.edu
-server: 127.0.0.1
+server: abraxas.phys.rpi.edu
+#server: 127.0.0.1
 #server: 10.0.0.211
 
 # The port for the NTP server running on the server

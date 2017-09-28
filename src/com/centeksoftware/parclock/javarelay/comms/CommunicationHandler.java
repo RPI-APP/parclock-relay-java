@@ -15,8 +15,7 @@ import com.centeksoftware.parclock.javarelay.time.TimeHandler;
 import com.centeksoftware.parclock.javarelay.time.TimeServer;
 
 /**
- * Handles big picture communications including handshaking, organizing time syncs, and starting
- * data transmissions
+ * Handles big picture communications including handshaking, organizing time syncs, and starting data transmissions
  * 
  * @author Daniel Centore
  *
@@ -51,8 +50,7 @@ public class CommunicationHandler
 	private LabviewServer labView = null;
 	private Scanner scan = null;
 	
-	public CommunicationHandler(MainFrame mf, String url, int relayPort, int ntpPortClient,
-			int ntpPortServer, int labviewPort, DataBuffer dataBuffer)
+	public CommunicationHandler(MainFrame mf, String url, int relayPort, int ntpPortClient, int ntpPortServer, int labviewPort, DataBuffer dataBuffer)
 	{
 		this.mf = mf;
 		this.url = url;
@@ -64,8 +62,7 @@ public class CommunicationHandler
 	}
 	
 	/**
-	 * The main loop which handles big picture communications including handshaking and what we are
-	 * instructed to do after that
+	 * The main loop which handles big picture communications including handshaking and what we are instructed to do after that
 	 */
 	public void communicationsLoop()
 	{
@@ -107,8 +104,7 @@ public class CommunicationHandler
 					
 					// Unknown failure or bad protocol version
 					continue;
-				}
-				else if (result == 0)
+				} else if (result == 0)
 				{
 					mf.println("CH", "Successful handshake!");
 					
@@ -118,8 +114,7 @@ public class CommunicationHandler
 					{
 						timeHandler = new TimeHandler(url, ntpPortServer, mf, this);
 						mf.println("CH", "Started time handler");
-					}
-					else
+					} else
 						mf.println("CH", "Reusing existing time handler");
 					
 					// Perform a full time synchronization
@@ -140,8 +135,7 @@ public class CommunicationHandler
 					labelServerConnected(false);
 					
 					continue;
-				}
-				else
+				} else
 				{
 					// Instructed to wait before retrying connection
 					wait = result;
@@ -198,8 +192,7 @@ public class CommunicationHandler
 			String result = scan.nextLine();
 			if (!result.equals("1"))
 			{
-				mf.println("CH", "Server refuses to accept client using protocol version ["
-						+ Main.PROTOCOL_VERSION + "]");
+				mf.println("CH", "Server refuses to accept client using protocol version [" + Main.PROTOCOL_VERSION + "]");
 				return -2;
 			}
 			
@@ -237,8 +230,7 @@ public class CommunicationHandler
 					
 					// Kill time server
 					ts.stop();
-				}
-				else
+				} else
 				{
 					// If the server needs the time and we don't have it, end the session and try
 					// again later
@@ -252,10 +244,10 @@ public class CommunicationHandler
 				wait = Math.max(wait, 1); // leq 0 is not indicative of a wait time
 				
 				return wait;
-			}
-			else
+			} else
 			{
-				// If the server doesn't need the time, (re)sync our time and begin normal operation
+				// If the server doesn't need the time, (re)sync our time and begin normal
+				// operation
 				return 0;
 			}
 			
@@ -280,8 +272,8 @@ public class CommunicationHandler
 	}
 	
 	/**
-	 * Starts (or restarts) the time server and starts the LabVIEW server (if necessary). Labels
-	 * ourselves as connected so {@link TrackSelector} starts sending data to the interwebs.
+	 * Starts (or restarts) the time server and starts the LabVIEW server (if necessary). Labels ourselves as connected so {@link TrackSelector} starts sending data
+	 * to the interwebs.
 	 */
 	private void normalOperation()
 	{
@@ -296,11 +288,9 @@ public class CommunicationHandler
 		if (labView == null)
 		{
 			mf.println("CH", "Establishing LabVIEW communications");
-			
 			labView = new LabviewServer(labviewPort, dataBuffer, timeHandler, mf);
 			labView.start();
-		}
-		else
+		} else
 			mf.println("CH", "Reusing existing LabVIEW comms");
 	}
 	
@@ -315,13 +305,11 @@ public class CommunicationHandler
 		try
 		{
 			writeLatest(dataChunk);
-			
 			return true;
 		} catch (IOException e)
 		{
 			labelServerConnected(false);
-			mf.println("MC",
-					"Lost connection while trying to transmit chunk: " + dataChunk.toString());
+			mf.println("MC", "Lost connection while trying to transmit chunk: " + dataChunk.toString());
 			e.printStackTrace();
 			
 			return false;
@@ -340,10 +328,9 @@ public class CommunicationHandler
 		if (out == null)
 			throw new IOException("Out is null");
 		
-		out.writeBytes("\n" + poll.getUuid() + FIELD_DELIM + poll.getData() + FIELD_DELIM
-				+ poll.getTimestampMs() + '\n');
+		out.writeBytes("\n" + poll.getUuid() + FIELD_DELIM + poll.getData() + FIELD_DELIM + poll.getTimestampMs() + '\n');
 	}
-
+	
 	public boolean isConnected()
 	{
 		return connected;

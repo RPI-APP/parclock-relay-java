@@ -36,8 +36,7 @@ public class DataChunk
 	/**
 	 * Creates a new {@link DataChunk}
 	 * 
-	 * @param uuid The universally unique identifier (UUID) of the data field this measurement
-	 *            belongs to
+	 * @param uuid The universally unique identifier (UUID) of the data field this measurement belongs to
 	 * @param data The data in String format
 	 * @param timestampMs The custom timestamp in ms
 	 */
@@ -57,17 +56,17 @@ public class DataChunk
 	{
 		return uuid + SEP_COMMA + data + SEP_COMMA + timestampMs;
 	}
-
+	
 	public String getUuid()
 	{
 		return uuid;
 	}
-
+	
 	public String getData()
 	{
 		return data;
 	}
-
+	
 	public long getTimestampMs()
 	{
 		return timestampMs;

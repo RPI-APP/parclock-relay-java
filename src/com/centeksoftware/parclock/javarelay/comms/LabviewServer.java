@@ -1,6 +1,7 @@
 package com.centeksoftware.parclock.javarelay.comms;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
@@ -75,22 +76,18 @@ public class LabviewServer
 	
 	private void server()
 	{
+		final ServerSocket serverSocket;
+		ServerSocket temp;
 		while (true)
 		{
-			setConnected(false);
-			mf.println("LV", "Trying to connect to LabView...");
-			
-			ServerSocket serverSocket;
-			Socket sock;
 			try
 			{
-				serverSocket = new ServerSocket(labviewPort);
-				sock = serverSocket.accept();
+				temp = new ServerSocket(labviewPort);
 			} catch (Exception e)
 			{
 				e.printStackTrace();
 				
-				mf.println("LV", "Failed to connect. Trying again...");
+				mf.println("LV", "Failed to open port. Trying again...");
 				
 				try
 				{
@@ -99,17 +96,53 @@ public class LabviewServer
 				{
 					e1.printStackTrace();
 				}
-				
 				continue;
 			}
-			
+			break;
+		}
+		
+		serverSocket = temp;
+		try
+		{
+			while (true)
+			{
+				try
+				{
+					new Handler(serverSocket.accept()).start();
+				} catch (IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		} finally
+		{
+			try
+			{
+				serverSocket.close();
+			} catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private class Handler extends Thread
+	{
+		private Socket sock;
+		
+		public Handler(Socket sock)
+		{
+			this.sock = sock;
+		}
+		
+		public void run()
+		{
 			setConnected(true);
 			mf.println("LV", "Successfully connected to LabView.");
 			
 			try
 			{
 				Scanner scan = new Scanner(sock.getInputStream());
-				
 				scan.useDelimiter(FIELD_DELIM);
 				
 				while (scan.hasNext())
@@ -131,19 +164,16 @@ public class LabviewServer
 					
 					if (lastTime.containsKey(guid) && lastTime.get(guid) >= time)
 					{
-						mf.println("LV", "Time was not monotonically increasing; skipping value. "
-								+ guid);
+						mf.println("LV", "Time was not monotonically increasing; skipping value. " + guid);
 						continue;
 					}
 					lastTime.put(guid, time);
 					
 					buffer.addChunk(new DataChunk(guid, data, time));
-					
 				}
 				scan.close();
-				
 				sock.close();
-				serverSocket.close();
+				setConnected(false);
 			} catch (Exception e)
 			{
 				e.printStackTrace();
@@ -151,5 +181,4 @@ public class LabviewServer
 			}
 		}
 	}
-	
 }
