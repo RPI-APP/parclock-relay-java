@@ -85,7 +85,6 @@ public class MainFrame extends javax.swing.JFrame
 			
 		} catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -268,12 +267,11 @@ public class MainFrame extends javax.swing.JFrame
 		action1 = new javax.swing.JLabel();
 		action2 = new javax.swing.JLabel();
 		
-		SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd_HH;mm;ss");// dd/MM/yyyy
+		SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd_HH;mm;ss");
 		Date now = new Date();
 		String timestamp = sdfDate.format(now);
-		timestamp = timestamp.replace(" ", "_");
 		
-		filename = "C:\\Users\\Ian\\Documents\\log_" + timestamp + ".txt"; // replace "C:\\Users\\Ian\\Documents\\" with actual file location
+		filename = "./logs/log_" + timestamp + ".txt"; 
 		log = new File(filename);
 		try
 		{
