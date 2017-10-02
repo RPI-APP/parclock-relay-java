@@ -1,6 +1,12 @@
 package com.centeksoftware.parclock.javarelay;
 
 import java.awt.Color;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.SwingUtilities;
 
@@ -68,6 +74,20 @@ public class MainFrame extends javax.swing.JFrame
 	
 	public synchronized void println(final String source, final String text)
 	{
+		SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date now = new Date();
+		String time = sdfDate.format(now);
+		
+		try
+		{
+			bw.write(time + "[" + source + "]: " + text + "\n");
+			bw.flush();
+			
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
 		Runnable runnable = new Runnable()
 		{
 			@Override public void run()
@@ -246,6 +266,22 @@ public class MainFrame extends javax.swing.JFrame
 		jLabel10 = new javax.swing.JLabel();
 		action1 = new javax.swing.JLabel();
 		action2 = new javax.swing.JLabel();
+		
+		SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd_HH;mm;ss");
+		Date now = new Date();
+		String timestamp = sdfDate.format(now);
+		
+		filename = "./logs/log_" + timestamp + ".txt"; 
+		log = new File(filename);
+		try
+		{
+			log.createNewFile();
+			fw = new FileWriter(log);
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		bw = new BufferedWriter(fw);
 		
 		jLabel7.setText("jLabel7");
 		
@@ -457,5 +493,10 @@ public class MainFrame extends javax.swing.JFrame
 	private javax.swing.JLabel mainserverURL;
 	private javax.swing.JTextArea textArea;
 	private javax.swing.JLabel timeserverConnection;
+	private String filename;
+	private File log;
+	private FileWriter fw;
+	private BufferedWriter bw;
+	
 	// End of variables declaration//GEN-END:variables
 }
